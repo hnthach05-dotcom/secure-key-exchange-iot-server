@@ -1,5 +1,4 @@
-# secure-key-exchange-iot-server
-IoT Security Project - Secure Key Exchange between IoT Device and Server
+## IoT Security Project - Secure Key Exchange between IoT Device and Server
 
 ## Overview
 
@@ -36,6 +35,7 @@ Reference materials
 
 output/
 Output demo
+
 ---
 
 ## Technologies
@@ -57,6 +57,6 @@ Output demo
 
 ## Author
 
-Student:
-Course:
-University:
+Student: Huynh Hong Ngoc Thach
+Course: Bao Mat IOT - HK3
+University: Van Hien University
