@@ -1,4 +1,9 @@
 from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives.kdf.hkdf import HKDF
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+import os
 
 print("=" * 60)
 print(" SECURE KEY EXCHANGE BETWEEN IOT DEVICE AND SERVER")
@@ -46,3 +51,19 @@ print(server_shared_secret.hex())
 
 print("\nShared Secret Match:",
       iot_shared_secret == server_shared_secret)
+
+# =========================
+# Derive Session Key (HKDF)
+# =========================
+
+session_key = HKDF(
+    algorithm=hashes.SHA256(),
+    length=32,
+    salt=None,
+    info=b"IoT Secure Session",
+).derive(iot_shared_secret)
+
+print("\n[3] Session Key Generated")
+
+print("Session Key:")
+print(session_key.hex())
