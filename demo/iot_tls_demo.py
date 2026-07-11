@@ -19,3 +19,30 @@ server_public_key = server_private_key.public_key()
 print("\n[1] ECC key pairs generated successfully.")
 print("IoT Device : Private Key + Public Key")
 print("Server     : Private Key + Public Key")
+
+# =========================
+# ECDH Key Exchange
+# =========================
+
+# IoT Device tạo Shared Secret
+iot_shared_secret = iot_private_key.exchange(
+    ec.ECDH(),
+    server_public_key
+)
+
+# Server tạo Shared Secret
+server_shared_secret = server_private_key.exchange(
+    ec.ECDH(),
+    iot_public_key
+)
+
+print("\n[2] Shared Secret Generated")
+
+print("IoT Shared Secret:")
+print(iot_shared_secret.hex())
+
+print("\nServer Shared Secret:")
+print(server_shared_secret.hex())
+
+print("\nShared Secret Match:",
+      iot_shared_secret == server_shared_secret)
