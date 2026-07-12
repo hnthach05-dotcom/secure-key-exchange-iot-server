@@ -67,3 +67,40 @@ print("\n[3] Session Key Generated")
 
 print("Session Key:")
 print(session_key.hex())
+
+# =========================
+# Encrypt Sensor Data
+# =========================
+
+# Tạo đối tượng AES-GCM với Session Key
+aesgcm = AESGCM(session_key)
+
+# Nonce 12 bytes (chuẩn cho AES-GCM)
+nonce = os.urandom(12)
+
+# Dữ liệu cảm biến
+sensor_data = "Temperature=31.5°C, Humidity=72%"
+
+# Chuyển sang bytes
+plaintext = sensor_data.encode()
+
+# Mã hóa
+ciphertext = aesgcm.encrypt(nonce, plaintext, None)
+
+print("\n[4] Sensor Data Encrypted")
+
+print("Original Data:")
+print(sensor_data)
+
+print("\nCiphertext (Hex):")
+print(ciphertext.hex())
+
+# =========================
+# Decrypt Sensor Data
+# =========================
+
+decrypted = aesgcm.decrypt(nonce, ciphertext, None)
+
+print("\n[5] Sensor Data Decrypted")
+
+print(decrypted.decode())
